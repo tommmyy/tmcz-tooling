@@ -1,27 +1,20 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: './src/index.js'
+		app: './src/index.js',
 	},
 	mode: 'development',
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: './dist'
+		contentBase: './lib',
 	},
-	plugins: [
-		new CleanWebpackPlugin(['lib']),
-		new HtmlWebpackPlugin({
-			title: 'Development',
-			template: 'src/assets/index.html'
-		})
-	],
+	plugins: [new CleanWebpackPlugin(['lib'])],
 	output: {
 		filename: '[name].bundle.js',
 		publicPath: '/',
-		path: path.resolve(__dirname, 'lib')
+		path: path.resolve(__dirname, 'lib'),
 	},
 	module: {
 		rules: [
@@ -29,9 +22,9 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: 'babel-loader'
-				}
-			}
-		]
-	}
+					loader: 'babel-loader',
+				},
+			},
+		],
+	},
 };
